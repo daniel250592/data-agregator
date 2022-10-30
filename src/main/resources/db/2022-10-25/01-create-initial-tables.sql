@@ -5,7 +5,10 @@ CREATE TABLE OFFER
 (
     id      SERIAL PRIMARY KEY,
     title   VARCHAR(400)  NOT NULL,
-    created TIMESTAMP
-);
+    company VARCHAR(50) NOT NULL,
+    city VARCHAR(50) NOT NULL,
+    seniority VARCHAR(10) NOT NULL,
+    fetchDate DATE
+)
 
 

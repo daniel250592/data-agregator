@@ -5,17 +5,17 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.web.bind.annotation.RestController;
 import pl.skoli.dataaggregator.dto.Offer;
+import pl.skoli.dataaggregator.entities.OfferEntity;
+import pl.skoli.dataaggregator.mapper.OfferMapper;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-@RestController
 @RequiredArgsConstructor
 public class ReceiverMq {
 
-    private final RabbitTemplate rabbitTemplate;
+    private final OfferMapper offerMapper;
 
     @RabbitListener(queues = "offers")
     public void get(String offerList) throws JsonProcessingException {
@@ -25,6 +25,11 @@ public class ReceiverMq {
         List<Offer> offers = objectMapper.readValue(offerList, new TypeReference<List<Offer>>() {
         });
 
-        System.out.println(offers);
+        List<OfferEntity> collect = offers.stream()
+                .map(offerMapper::toEntity)
+                .collect(Collectors.toList());
+
+
+        System.out.println(collect);
     }
 }

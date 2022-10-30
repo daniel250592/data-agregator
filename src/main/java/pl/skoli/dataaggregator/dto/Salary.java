@@ -13,8 +13,8 @@ import pl.skoli.dataaggregator.dto.enums.ContractType;
 @AllArgsConstructor
 public class Salary {
 
-    private Integer from;
-    private Integer to;
+    private Integer minimum;
+    private Integer maximum;
     private String currency;
     private ContractType contractType;
 }

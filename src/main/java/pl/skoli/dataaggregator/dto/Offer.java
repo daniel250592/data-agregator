@@ -14,6 +14,6 @@ import java.util.List;
 public class Offer {
 
     private OfferInfo offerInfo;
-    private List<Salary> salary;
+    private List<Salary> salaryList;
     private Technologies technologies;
 }
