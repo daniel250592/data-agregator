@@ -14,7 +14,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -37,7 +36,7 @@ public class OfferEntity {
     @Enumerated(EnumType.STRING)
     private Seniority seniority;
 
-    private LocalDate fetchDate;
+    private String fetchDate;
 
     @OneToMany(mappedBy = "offer", targetEntity = SalaryEntity.class, fetch = FetchType.LAZY)
     private List<SalaryEntity> salaryList;

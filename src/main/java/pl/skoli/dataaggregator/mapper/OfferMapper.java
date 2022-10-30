@@ -12,7 +12,7 @@ public interface OfferMapper {
     @Mapping(target = "company", source = "offerInfo.company")
     @Mapping(target = "city", source = "offerInfo.city")
     @Mapping(target = "seniority", source = "offerInfo.seniority")
-//    @Mapping(target = "fetchDate", source = "offerInfo.fetchDate")
+    @Mapping(target = "fetchDate", source = "offerInfo.fetchDate")
     @Mapping(target = "salaryList", expression = "java(new pl.skoli.dataaggregator.mapper.SalaryMapperImpl().toEntity(offer.getSalaryList()))")
     OfferEntity toEntity(Offer offer);
 

@@ -18,6 +18,6 @@ public class OfferInfo {
     private String company;
     private String city;
     private Seniority seniority;
-    private final LocalDateTime fetchDate = LocalDateTime.now();
+    private final String fetchDate = LocalDateTime.now().toString();
 
 }
