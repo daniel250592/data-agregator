@@ -26,7 +26,10 @@ public class ReceiverMq {
         List<Offer> offers = objectMapper.readValue(offerList, new TypeReference<List<Offer>>() {
         });
 
-        offers.forEach(offerService::persistOffer);
+        System.out.println(offers);
+
+
+//        offers.forEach(offerService::persistOffer);
 
     }
 
