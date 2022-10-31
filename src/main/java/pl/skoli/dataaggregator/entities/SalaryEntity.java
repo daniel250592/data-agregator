@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.skoli.dataaggregator.dto.enums.ContractType;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -33,9 +34,14 @@ public class SalaryEntity {
     private String currency;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "CONTRACT_TYPE")
     private ContractType contractType;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "offer_id", nullable = false)
+    @JoinColumn(name = "OFFER_ID", nullable = false)
     private OfferEntity offer;
+
+    public void assignOffer(final OfferEntity offerEntity) {
+        this.setOffer(offerEntity);
+    }
 }

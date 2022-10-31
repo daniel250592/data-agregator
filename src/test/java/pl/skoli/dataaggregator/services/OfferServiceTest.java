@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import pl.skoli.dataaggregator.entities.OfferEntity;
-import pl.skoli.dataaggregator.mapper.OfferMapperImpl;
 import pl.skoli.dataaggregator.mocks.OfferMock;
 
 @SpringBootTest
@@ -14,11 +13,14 @@ class OfferServiceTest {
 
     @Autowired
     private OfferService offerService;
+    @Autowired
+    private ExtendedOfferMapper extendedOfferMapper;
 
     @Test
     void persist() {
-        OfferMapperImpl offerMapper = new OfferMapperImpl();
-        OfferEntity offerEntity = offerMapper.toEntity(OfferMock.getOfferMock());
-        offerService.persist(offerEntity);
+
+        OfferEntity offerEntity = extendedOfferMapper.mapToEntity(OfferMock.getOfferMock());
+
+        offerService.persistOffers(offerEntity);
     }
 }

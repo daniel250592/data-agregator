@@ -6,8 +6,9 @@ import pl.skoli.dataaggregator.entities.SalaryEntity;
 
 import java.util.List;
 
-@Mapper
-interface SalaryMapper {
+@Mapper(componentModel = "spring")
+public interface SalaryMapper {
 
     List<SalaryEntity> toEntity(List<Salary> salary);
+
 }

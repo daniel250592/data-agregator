@@ -5,31 +5,29 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.stereotype.Component;
 import pl.skoli.dataaggregator.dto.Offer;
-import pl.skoli.dataaggregator.entities.OfferEntity;
-import pl.skoli.dataaggregator.mapper.OfferMapper;
+import pl.skoli.dataaggregator.services.OfferService;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
+@Component
 public class ReceiverMq {
 
-    private final OfferMapper offerMapper;
+    private final OfferService offerService;
 
     @RabbitListener(queues = "offers")
     public void get(String offerList) throws JsonProcessingException {
 
-        ObjectMapper objectMapper = new ObjectMapper();
+
+        var objectMapper = new ObjectMapper();
 
         List<Offer> offers = objectMapper.readValue(offerList, new TypeReference<List<Offer>>() {
         });
 
-        List<OfferEntity> collect = offers.stream()
-                .map(offerMapper::toEntity)
-                .collect(Collectors.toList());
+        offers.forEach(offerService::persistOffer);
 
-
-        System.out.println(collect);
     }
+
 }

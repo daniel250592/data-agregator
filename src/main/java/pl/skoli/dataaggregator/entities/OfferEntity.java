@@ -5,16 +5,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.skoli.dataaggregator.dto.enums.Seniority;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.List;
 
 @Entity
 @Table(name = "OFFER")
@@ -36,8 +34,6 @@ public class OfferEntity {
     @Enumerated(EnumType.STRING)
     private Seniority seniority;
 
+    @Column(name = "FETCH_DATE")
     private String fetchDate;
-
-    @OneToMany(mappedBy = "offer", targetEntity = SalaryEntity.class, fetch = FetchType.LAZY)
-    private List<SalaryEntity> salaryList;
 }
