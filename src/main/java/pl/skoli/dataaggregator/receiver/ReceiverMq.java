@@ -20,17 +20,11 @@ public class ReceiverMq {
     @RabbitListener(queues = "offers")
     public void get(String offerList) throws JsonProcessingException {
 
-
         var objectMapper = new ObjectMapper();
 
         List<Offer> offers = objectMapper.readValue(offerList, new TypeReference<List<Offer>>() {
         });
 
-        System.out.println(offers);
-
-
-//        offers.forEach(offerService::persistOffer);
-
+        offers.forEach(offerService::persistOffer);
     }
-
 }

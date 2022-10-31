@@ -12,6 +12,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -22,7 +23,8 @@ import javax.persistence.Table;
 public class OfferEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "offer_generator")
+    @SequenceGenerator(name = "offer_generator", sequenceName = "offer_id_seq", allocationSize = 1)
     private Long id;
 
     private String title;

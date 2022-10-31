@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -24,7 +25,8 @@ import javax.persistence.Table;
 public class SalaryEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "salary_generator")
+    @SequenceGenerator(name = "salary_generator", sequenceName = "salary_id_seq", allocationSize = 1)
     private Long id;
 
     private Integer minimum;
@@ -40,8 +42,4 @@ public class SalaryEntity {
     @ManyToOne(optional = false)
     @JoinColumn(name = "OFFER_ID", nullable = false)
     private OfferEntity offer;
-
-    public void assignOffer(final OfferEntity offerEntity) {
-        this.setOffer(offerEntity);
-    }
 }
