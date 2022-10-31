@@ -15,5 +15,5 @@ public class Offer {
 
     private OfferInfo offerInfo;
     private List<Salary> salaryList;
-    private Technologies technologies;
+    private Technology technology;
 }

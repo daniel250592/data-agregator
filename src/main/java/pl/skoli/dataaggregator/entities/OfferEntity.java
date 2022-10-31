@@ -1,5 +1,6 @@
 package pl.skoli.dataaggregator.entities;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,14 +13,17 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import java.util.Set;
 
 @Entity
 @Table(name = "OFFER")
 @Getter
 @NoArgsConstructor
 @Setter
+@EqualsAndHashCode
 public class OfferEntity {
 
     @Id
@@ -38,4 +42,7 @@ public class OfferEntity {
 
     @Column(name = "FETCH_DATE")
     private String fetchDate;
+
+    @ManyToMany(mappedBy = "offerEntityList")
+    private Set<TechnologyEntity> technologyEntityList;
 }

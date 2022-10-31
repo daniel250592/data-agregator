@@ -11,8 +11,8 @@ import java.util.List;
 @Setter
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class Technologies {
+public class Technology {
 
-    private List<String> technologies;
+    private List<String> technologyList;
 
 }

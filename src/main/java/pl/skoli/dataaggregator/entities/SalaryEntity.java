@@ -1,5 +1,6 @@
 package pl.skoli.dataaggregator.entities;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,6 +24,7 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @NoArgsConstructor
+@EqualsAndHashCode
 public class SalaryEntity {
 
     @Id
@@ -39,7 +42,7 @@ public class SalaryEntity {
     @Column(name = "CONTRACT_TYPE")
     private ContractType contractType;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "OFFER_ID", nullable = false)
     private OfferEntity offer;
 }
