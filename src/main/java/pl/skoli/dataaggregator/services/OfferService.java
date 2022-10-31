@@ -20,6 +20,7 @@ public class OfferService {
     private final SalaryRepository salaryRepository;
     private final OfferMapper offerMapper;
     private final SalaryMapper salaryMapper;
+    private final TechnologyService technologyService;
 
 
     public void persistOffer(final Offer offer) {
@@ -29,6 +30,8 @@ public class OfferService {
         var salaryEntities = salaryMapper.toEntity(offer.getSalaryList());
 
         salaryEntities.forEach(s -> s.setOffer(offerEntity));
+
+        technologyService.persistTechnologies(offer.getTechnology());
 
         this.persistSalary(salaryEntities);
     }
